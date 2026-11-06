@@ -1,4 +1,4 @@
-# Part 3: Threat-Model
+# Part 3: Threat Model
 Part 3 threat models the agent built in Parts 1 and 2 (Foundry Agent and its API Management gateway), mapping each threat and risk to the control that covers it, the evidence that proves it, or the gap that remains.
 | File | What it covers | Status |
 |---|---|---|
