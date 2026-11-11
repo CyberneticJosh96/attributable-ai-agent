@@ -39,3 +39,20 @@ It names 12 risks that generative AI creates or makes worse, and more than 200 s
 | NIST-08 | Information Integrity | No public output; this risk is about misinformation at scale |
 | NIST-10 | Intellectual Property | Outputs summarize my own lab data |
 | NIST-11 | Obscene, Degrading, and/or Abusive Content | Narrow internal use case with no open ended generation |
+
+## Findings
+
+**5 of 12 risks apply.** The other 7 don't fit a narrow, read-only agent over its own data: there's no open ended generation, no public output, no decisions about people, and no model training.
+
+| Status | Count | Risks |
+|---|---|---|
+| Covered | 2 | Data Privacy (NIST-04), Information Security (NIST-09) |
+| Partial | 2 | Confabulation (NIST-02), Human-AI Configuration (NIST-07) |
+| Gap | 1 | Value Chain and Component Integration (NIST-12) |
+
+**What would close each open item**
+- **NIST-02 Confabulation:** Run a fixed set of questions with known answers against the snapshots, and record how many come back correct and cited. One out of scope test shows the agent won't guess, but it isn't an accuracy measure.
+- **NIST-07 Human-AI Configuration:** Add a line to every answer telling the reader to check the cited file before acting on it.
+- **NIST-12 Value Chain:** Record the model, version, provider and deployment type, and link the provider's published documentation for the model.
+
+**The bigger gap is the framework's, not the system's.** 600-1 was written for generative AI, not agents. Part 1's main finding, that the agent's tool reached storage as a shared identity rather than its own, doesn't map cleanly to any of these 12 risks. Agent identity and tool use are covered next, in `stride.md` (repudiation) and `owasp-agentic.md` (ASI03, Identity & Privilege Abuse).
