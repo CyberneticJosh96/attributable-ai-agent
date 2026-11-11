@@ -1,3 +1,5 @@
+![Attributable AI Agent](images/covers/cover-repo-preview.png)
+
 # Attributable AI Agent
 
 An AI agent on Microsoft Foundry that answers security questions from tamper-proof data, holds no secrets, can't write anything, and leaves a trail tying every read back to it. Built in a personal Azure trial.
@@ -10,8 +12,11 @@ An AI agent on Microsoft Foundry that answers security questions from tamper-pro
 | --- | --- | --- |
 | **1. Attributable agent** | A Foundry agent with its own Entra identity, reading tamper proof data through a GET-only tool. Finding: the tool authenticated as the shared Foundry identity, so attribution needed trace and storage log correlation. | This page |
 | **2. AI gateway** | APIM in front of the model: certificate based Entra tokens, `validate-jwt` with audience and role checks, per identity rate and token limits, keyless managed identity to Foundry, and logs that record why every call was allowed or denied. | [docs/part2-ai-gateway.md](docs/part2-ai-gateway.md) |
+| **3. Threat model** | NIST AI 600-1 triage of the agent: 5 of 12 risks apply (2 covered, 2 partial, 1 gap), each tied to evidence or marked as a gap. STRIDE and the OWASP LLM and Agentic Top 10 in progress. | [threat-model/](threat-model/) |
 
 **Part 2 in one line:** the gateway sends the same 401 to every rejected caller, but the logs record exactly why (`TokenNotPresent`, `TokenInvalidAudience`, `OpenAITokenLimitExceeded`) and which verified app made every allowed call.
+
+![Part 1: Agent Identity and Attribution](images/covers/cover-part1.png)
 
 ## The problem
 AI agents are starting to touch security data. The hard question isn't whether they answer well; it's whose identity acted, what it was allowed to do, and whether anyone can prove it afterwards.
