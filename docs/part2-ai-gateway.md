@@ -1,3 +1,5 @@
+![Part 2: AI Gateway with Azure API Management](../images/covers/cover-part2.png)
+
 # Part 2: An AI gateway that knows who's calling
 
 Part 1 ended with an attribution problem. The agent's tool reached storage as the shared Foundry resource identity, so working out which agent did what meant joining traces against storage logs.
