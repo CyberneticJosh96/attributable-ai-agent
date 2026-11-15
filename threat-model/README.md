@@ -8,7 +8,7 @@ Part 3 threat models the agent built in Parts 1 and 2 (Foundry Agent and its API
 |---|---|---|
 | [nist-ai-600-1.md](nist-ai-600-1.md) | NIST AI 600-1 GenAI risk triage | Done |
 | [architecture.md](architecture.md) | Data flow diagram with trust boundaries | Done |
-| stride.md | STRIDE threats per element and per interaction | Planned |
+| [stride.md](stride.md) | STRIDE threats per element and per interaction | Done |
 | owasp-llm.md | OWASP LLM Top 10 (2026) quick pass | Planned |
 | owasp-agentic.md | OWASP Agentic Top 10 mapping | Planned |
 | gaps.md | Consolidated gap backlog | Planned |
