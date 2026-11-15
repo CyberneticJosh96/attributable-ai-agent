@@ -31,9 +31,9 @@ STRIDE is a threat classification model from Microsoft. Each letter is a type of
 
 | ID | Element / flow | STRIDE | Threat | Control | Evidence | Status |
 |---|---|---|---|---|---|---|
-| S‑01 | Analyst | S | Someone signs in as the analyst | MFA enforced tenant-wide | [01](../evidence/01-security-defaults.png) | Covered |
+| S‑01 | Analyst | S | Someone signs in as the analyst | MFA enforced tenant wide | [01](../evidence/01-security-defaults.png) | Covered |
 | R‑01 | Analyst | R | Analyst denies asking a question | Each agent run is traced; whether the trace records the signed-in user isn't verified | [21c](../evidence/21c-tool-call-trace.png) | Partial |
-| S‑02 | Admin | S | Someone signs in as the admin | MFA enforced tenant-wide | [01](../evidence/01-security-defaults.png) | Covered |
+| S‑02 | Admin | S | Someone signs in as the admin | MFA enforced tenant wide | [01](../evidence/01-security-defaults.png) | Covered |
 | R‑02 | Admin | R | Admin denies writing a file | Storage logs separate the collector's writes from human writes | [15](../evidence/15-attribution-kql.png) | Covered |
 | S‑03 | Client app | S | A stolen private key lets someone act as the client app | Certificate credential, no secret; the key sits unencrypted on a laptop | [P2‑03](../images/part2/P2-03-appreg-cert-no-secret.png) | Partial |
 | R‑03 | Client app | R | Client app denies making calls | Gateway logs record the verified app ID on every allowed or throttled call | [P2‑10](../images/part2/P2-10-kql-denials.png) | Covered |
