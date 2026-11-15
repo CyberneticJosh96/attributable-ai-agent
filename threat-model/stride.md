@@ -17,7 +17,7 @@ STRIDE is a threat classification model from Microsoft. Each letter is a type of
 | D | Denial of service | Availability |
 | E | Elevation of privilege | Authorization |
 
-**Where it stops.** STRIDE wasn't built for agent-specific threats such as goal hijacking and tool misuse. Those are covered in `owasp-agentic.md` (planned).
+**Where it stops.** STRIDE wasn't built for agent specific threats such as goal hijacking and tool misuse. Those are covered in `owasp-agentic.md` (planned).
 
 ## Method
 1. **Per element.** Each element is checked against the categories that apply to its type: external entities for S and R, processes for all six, data stores for T, I and D, plus R for the log store because it holds the audit trail.
@@ -42,7 +42,7 @@ STRIDE is a threat classification model from Microsoft. Each letter is a type of
 
 | ID | Element / flow | STRIDE | Threat | Control | Evidence | Status |
 |---|---|---|---|---|---|---|
-| S‑04 | Collector | S | Something else writes snapshots as the collector | System-assigned managed identity with no secret; only the collector holds write access | [10](../evidence/10-collector-identity.png), [16](../evidence/16-temp-role-removed.png) | Covered |
+| S‑04 | Collector | S | Something else writes snapshots as the collector | System assigned managed identity with no secret; only the collector holds write access | [10](../evidence/10-collector-identity.png), [16](../evidence/16-temp-role-removed.png) | Covered |
 | T‑01 | Collector | T | Someone edits the workflow to write false data | No change control or alert on workflow edits | None | Gap |
 | R‑04 | Collector | R | A write can't be tied to the collector | Storage logs show the collector's identity on each write | [15](../evidence/15-attribution-kql.png) | Covered |
 | I‑01 | Collector | I | The collector's identity is used to read security data | Three scoped Graph read permissions; Security Reader is subscription-wide by design | [12](../evidence/12-graph-permissions.png), [11c](../evidence/11c-security-reader-scope-fixed.png) | Partial |
@@ -53,7 +53,7 @@ STRIDE is a threat classification model from Microsoft. Each letter is a type of
 | R‑05 | Agent | R | The agent's actions can't be reconstructed | Traces record each tool call and its output | [21c](../evidence/21c-tool-call-trace.png), [24b](../evidence/24b-trace-tool-output.png) | Covered |
 | I‑02 | Agent | I | The agent reveals more than it should | Read-only scope; answers cite their source and flag synthetic data; the sensitive data guardrail annotates but doesn't block | [21b](../evidence/21b-synthetic-disclosed.png), [05b](../evidence/05b-guardrail-sensitive-data.png) | Partial |
 | D‑02 | Agent | D | Heavy use exhausts model quota or budget | Budget alerts only; no per-user limit on the agent path | [02](../evidence/02-budget-alerts.png) | Partial |
-| E‑02 | Agent | E | The agent is talked into writing or deleting data | GET-only tool; write requests refused; jailbreak guardrail set to block | [18](../evidence/18-tool-spec.png), [23a](../evidence/23a-write-refused.png), [05a](../evidence/05a-guardrail-controls.png) | Covered |
+| E‑02 | Agent | E | The agent is talked into writing or deleting data | GET only tool; write requests refused; jailbreak guardrail set to block | [18](../evidence/18-tool-spec.png), [23a](../evidence/23a-write-refused.png), [05a](../evidence/05a-guardrail-controls.png) | Covered |
 | S‑06 | Storage tool | S | The tool reaches storage as the shared Foundry identity, not the agent's | Logged as an exception; the production fix is one agent per resource or a tool that uses the agent identity | [18](../evidence/18-tool-spec.png), [Exception register](../docs/Exception-register.md) | Partial |
 | T‑03 | Storage tool | T | The tool spec is changed to add write operations | The identity holds read access only; immutability refuses overwrite and delete | [18](../evidence/18-tool-spec.png), [08](../evidence/08-immutable-overwrite-blocked.png), [09](../evidence/09-immutable-delete-blocked.png) | Covered |
 | R‑06 | Storage tool | R | Tool calls go unrecorded | Each tool call and its output appear in the trace | [21c](../evidence/21c-tool-call-trace.png) | Covered |
@@ -62,7 +62,7 @@ STRIDE is a threat classification model from Microsoft. Each letter is a type of
 | S‑07 | Model | S | A caller skips the gateway and calls the model directly | Key auth disabled; anyone with an Entra role on the Foundry resource can still call it directly | [04](../evidence/04-foundry-key-auth-disabled.png), [Part 2 finding 2](../docs/part2-ai-gateway.md#findings) | Partial |
 | T‑04 | Model | T | Instructions planted in snapshot data steer the model | Indirect prompt injection guardrail set to block; the planted injection was blocked on the tool response | [05a](../evidence/05a-guardrail-controls.png), [23c](../evidence/23c-injection-blocked.png), [23d](../evidence/23d-injection-file-read-log.png) | Covered |
 | I‑04 | Model | I | Prompts or outputs leave the expected boundary | Global Standard deployment may process prompts outside the region; the sensitive data guardrail annotates only | [05b](../evidence/05b-guardrail-sensitive-data.png), [Exception register](../docs/Exception-register.md) | Partial |
-| D‑03 | Model | D | Model quota is exhausted | Per-caller token limits on the gateway path; none on the agent path | [P2‑09 429](../images/part2/P2-09-token-limit-429.png) | Partial |
+| D‑03 | Model | D | Model quota is exhausted | Per caller token limits on the gateway path; none on the agent path | [P2‑09 429](../images/part2/P2-09-token-limit-429.png) | Partial |
 | E‑04 | Model | E | A jailbreak makes the model ignore its instructions | Jailbreak guardrail set to block | [05a](../evidence/05a-guardrail-controls.png) | Covered |
 | S‑08 | APIM | S | A caller with no token gets through | validate-jwt checks signature, expiry, audience, issuer and role | [P2‑06](../images/part2/P2-06-validate-jwt-policy.png), [P2‑08 no token](../images/part2/P2-08-no-token-401.png) | Covered |
 | T‑05 | APIM | T | Someone edits the policy and removes validate-jwt | Policy kept in the repo; no drift detection or alert | [Policy file](../policies/foundry-model-inbound.xml) | Gap |
